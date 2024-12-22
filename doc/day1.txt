@@ -1,0 +1,57 @@
+**🚀 30 Days of API Automation Testing with Rest Assured: Day 1 - Let's Begin!**
+
+APIs are the backbone of modern applications, and mastering API testing is an essential skill for developers and testers alike. If you’re looking to level up your automation skills, this **30-day challenge** will guide you through the process of learning and practicing API automation using **Rest Assured** in Java.
+
+Rest Assured is a powerful tool that simplifies API testing. Over the next month, we’ll cover everything from basic requests to building a robust automation framework.
+
+### 🌟 Why Rest Assured?
+- **Simple to learn**: Beginner-friendly syntax.
+- **Feature-rich**: Supports all HTTP methods, JSON/XML parsing, and advanced validations.
+- **Integrable**: Easily pairs with testing frameworks like TestNG and JUnit.
+
+---
+
+### 🛠️ Day 1: Setting Up for Success
+To start, ensure you have the right tools in place:
+1. **Java**: Install the latest JDK ([Download here](https://lnkd.in/gnU48a2A)).
+2. **IDE**: Choose IntelliJ IDEA or Eclipse.
+3. **Maven**: Set up Maven ([Guide here](https://lnkd.in/gxQ5Rwk6)).
+4. **Rest Assured**: Add it as a dependency in your Maven project.
+
+Here’s a quick program to test your setup:
+
+```java
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
+public class APITest {
+ public static void main(String[] args) {
+ Response response = RestAssured.get("https://lnkd.in/gRN3y5UK");
+ System.out.println("Status Code: " + response.getStatusCode());
+ System.out.println("Response Body: " + response.getBody().asString());
+ }
+}
+```
+
+Run this code to verify that everything is working smoothly!
+
+---
+
+### 🎯 What’s Next?
+Over the next 29 days, we’ll dive into:
+- API testing best practices
+- GET, POST, PUT, DELETE methods
+- JSONPath and Hamcrest validations
+- Automating tests with TestNG
+- Building a reusable framework
+
+This journey will transform your API testing skills, preparing you for real-world projects.
+
+---
+
+💬 **Join the Challenge!**
+Are you ready to commit to 30 days of learning and growth? Share your progress and insights in the comments below! Let’s build this skill together and make API automation second nature.
+
+Follow me for daily updates, tips, and resources. Let’s start strong! 💻🔥
+
+hashtag#API hashtag#AutomationTesting hashtag#RestAssured hashtag#Java hashtag#LearningJourney hashtag#30DayChallenge
