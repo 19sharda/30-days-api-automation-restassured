@@ -95,6 +95,7 @@ Expected: 1
 
 💡 *Challenge*: Test another endpoint like `/users/1` and print its response. Try validating additional fields such as `username` or `email`. Share your findings!  
 
+Git Repo: https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/practiceDay2.java
 #API #AutomationTesting #RestAssured #Java #LearningJourney  
 
 --- 
