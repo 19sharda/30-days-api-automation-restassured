@@ -1,0 +1,100 @@
+# 🚀 30 Days of API Automation with Rest Assured: Day 2 - First GET Request
+
+Welcome to *Day 2*! Let’s write our first API test using Rest Assured to send a GET request and validate the response, along with detailed logging and assertion results.
+
+### 🌟 What is a GET Request?  
+
+A *GET request* retrieves data from a server. Example: fetching user details or a list of products.  
+
+### 🛠 Writing a GET Request  
+
+We’ll use [JSONPlaceholder](https://jsonplaceholder.typicode.com/) as our practice API.  
+
+Endpoint: [https://jsonplaceholder.typicode.com/posts/1](https://jsonplaceholder.typicode.com/posts/1)  
+
+Updated Code with Output Logging:  
+
+```java
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+
+public class GetRequestExample {
+
+  public static void main(String[] args) {
+
+    // Set Base URI
+    RestAssured.baseURI = "https://jsonplaceholder.typicode.com";
+
+    // Send GET request and store the response
+    Response response = given()
+      .when()
+      .get("/posts/1");
+
+    // Print the response body
+    System.out.println("Response Body:");
+    System.out.println(response.getBody().asPrettyString());
+
+    // Run assertions with proper logging
+    try {
+      System.out.println("\nRunning assertions...");
+      response.then()
+        .statusCode(200)
+        .body("userId", equalTo(1))
+        .body("title", notNullValue());
+      System.out.println("Assertions passed successfully!");
+    } catch (AssertionError e) {
+      System.err.println("One or more assertions failed:");
+      System.err.println(e.getMessage());
+    }
+  }
+}
+```
+
+### 🖥 Sample Output  
+
+When the request is successful and all assertions pass:  
+```plaintext
+Response Body:
+{
+  "userId": 1,
+  "id": 1,
+  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+  "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+}
+
+Running assertions...
+Assertions passed successfully!
+```
+
+If any assertion fails (e.g., `userId` is not `1`):  
+```plaintext
+Response Body:
+{
+  "userId": 2,
+  "id": 1,
+  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+  "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+}
+
+Running assertions...
+One or more assertions failed:
+JSON path userId doesn't match.
+Expected: 1
+  Actual: 2
+```
+
+### 🎯 Key Learnings  
+
+1. *GET requests* retrieve data.  
+2. Use Rest Assured’s `given()`, `when()`, and `then()` for clean, readable tests.  
+3. Validate status codes and response data using assertions.  
+4. Adding logging and assertion results helps in debugging and enhances the readability of tests.  
+
+💡 *Challenge*: Test another endpoint like `/users/1` and print its response. Try validating additional fields such as `username` or `email`. Share your findings!  
+
+#API #AutomationTesting #RestAssured #Java #LearningJourney  
+
+--- 
