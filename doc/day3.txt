@@ -24,5 +24,6 @@ Today is all about understanding the fundamentals of APIs, which are crucial for
 This foundational knowledge is essential as we begin automating API testing tomorrow!
 
 What’s your experience with APIs? Share your insights below.
+Fun with GIt :https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/practiceDay3.java
 
 #API #RestAssured #LearningJourney #AutomationTesting
