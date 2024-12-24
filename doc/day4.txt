@@ -1,0 +1,107 @@
+### 🚀 Day 4: Automating POST Requests with Rest Assured
+
+**Post Content:**
+
+Today, I explored how to automate **POST requests**, which are commonly used to create new resources on a server. Unlike **GET requests**, which retrieve data, **POST requests** are used to send data to the server for the creation of new records.
+
+---
+
+### 🌟 What is a POST Request?
+
+- **Purpose:** A POST request is used to create new data on the server.
+- **Example:** Submitting a new user registration form or adding a post to a blog.
+- **Key Element:** It includes a request body (usually in JSON or XML format) that contains the data you want to create.
+
+#### Layman's Example:
+Imagine you're filling out a registration form to create a new account on a website. Once you fill in your details and hit the "Submit" button, your information is sent to the server via a POST request, creating a new user on the website.
+
+---
+
+### 🛠 Automating a POST Request with Rest Assured
+
+In this section, we'll automate a **POST request** using **Rest Assured**, a popular library for testing RESTful APIs in Java. Here’s a simple example to create a new post using the [JSONPlaceholder](https://jsonplaceholder.typicode.com/) API:
+
+#### Code Example:
+
+```java
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+
+public class PostRequestExample {
+    public static void main(String[] args) {
+        // Base URI for the API
+        baseURI = "https://jsonplaceholder.typicode.com";
+
+        // Send POST request to create a new post
+        given()
+            .header("Content-Type", "application/json") // Set the content type to JSON
+            .body("{\"title\":\"foo\",\"body\":\"bar\",\"userId\":1}") // Define request body
+        .when()
+            .post("/posts") // Specify the endpoint for creating posts
+        .then()
+            .statusCode(201) // Validate that the server responds with a 201 status code (resource created)
+            .body("title", equalTo("foo")) // Verify that the title is 'foo'
+            .body("userId", equalTo(1)); // Verify that the userId is 1
+    }
+}
+```
+
+### 🔑 Key Steps to Automating POST Requests:
+1. **`given()`**: This method sets up the request, where you can define headers and the body content. In this example, we set the "Content-Type" header to "application/json" and provide a JSON body with details about the post.
+
+2. **`post()`**: This method sends the POST request to the server with the specified body and headers.
+
+3. **`then()`**: After sending the request, this method is used to validate the response. We check:
+   - The HTTP status code to confirm that the resource was created (201).
+   - The content of the response body to verify that the post’s title and user ID match the data we sent.
+
+#### Log Example:
+In the code, we validate that the response contains the correct title and userId. When running this, you will see output logs like:
+
+```
+[INFO] POST request sent to https://jsonplaceholder.typicode.com/posts
+[INFO] Response code: 201 (Created)
+[INFO] Response body: { "id": 101, "title": "foo", "body": "bar", "userId": 1 }
+[INFO] Title and userId validated successfully.
+```
+
+---
+
+### 💡 Practice Exercise
+
+1. Use a different endpoint from JSONPlaceholder (e.g., `/comments`) to send a POST request.
+2. Experiment with different request bodies and validate the responses.
+
+Try modifying the request body and ensure that the response aligns with your expectations.
+
+---
+
+### 🔮 Coming Up Next:
+Tomorrow, we will dive into **PUT and PATCH requests**, which are used to update existing resources. We will explore how these requests work and how to automate them in the same way.
+
+---
+
+Feel free to share your practice results or any questions you encounter along the way!
+
+
+Interview Questions
+General API Testing and POST Requests:
+What is a POST request, and how does it differ from a GET request?
+What status code does the server typically return when a POST request successfully creates a resource?
+Why is it necessary to set the "Content-Type" header to "application/json" in the Rest Assured example?
+How would you handle dynamic data (such as random user IDs or timestamps) in POST requests when automating tests using Rest Assured?
+Explain the role of given(), when(), and then() in Rest Assured.
+Rest Assured Specific Questions:
+What happens if the body content in a POST request is invalid JSON?
+How would you validate that a new resource was created successfully with the correct data in the response body after sending a POST request?
+What are some potential issues you might encounter when automating POST requests, and how would you address them?
+How would you handle API rate limiting in your POST request automation?
+How can you automate sending a POST request to a resource that requires authentication (e.g., using an API key)?
+Advanced API Automation:
+What is parameterization in API testing, and how can it be achieved in Rest Assured?
+How does jsonPath() help in validating the response of a POST request?
+What would you do if a POST request fails with a 500 Internal Server Error?
+How would you debug failed POST requests in Rest Assured?
+Debugging and Best Practices:
+What are some best practices for writing maintainable and reusable API tests with Rest Assured?
+#API #AutomationTesting #RestAssured #Java
