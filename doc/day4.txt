@@ -80,7 +80,7 @@ Try modifying the request body and ensure that the response aligns with your exp
 Tomorrow, we will dive into **PUT and PATCH requests**, which are used to update existing resources. We will explore how these requests work and how to automate them in the same way.
 
 ---
-
+Git: https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/practiceDay4.java
 Feel free to share your practice results or any questions you encounter along the way!
 
 
