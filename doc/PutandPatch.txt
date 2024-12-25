@@ -50,6 +50,8 @@ public class PutandPatch {
 2. Use PATCH to update only the title of the post.  
 3. Validate the response and ensure the updates are reflected.  
 
+Git: https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/PutandPatch.java
+
 # 4. What’s Next?  
 Tomorrow, we’ll learn to delete resources using DELETE requests and verify their removal.
 ---
