@@ -1,0 +1,55 @@
+🚀 Day 5: Automating PUT and PATCH Requests
+
+# 1. What are we doing today?  
+We’re learning how to update resources:  
+- PUT: Replace the entire resource.  
+- PATCH: Update only specific fields.  
+
+💡Example: Imagine updating your online profile.
+- PUT: Replace the whole profile (name, email, phone).  
+- PATCH: Update just the email.  
+
+2. Code for Implementation
+
+java
+package tests;
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.equalTo;
+
+public class PutandPatch {
+    public static void main(String[] args) {
+        baseURI = "https://jsonplaceholder.typicode.com";
+        given()
+                .header("Content-Type", "application/json")
+                .body("{\"title\":\"Updated Title\",\"body\":\"Updated Content\",\"userId\":1}")
+                .when()
+                .put("/posts/1")
+                .then()
+                .log().all()
+                .statusCode(200)
+                .body("title", equalTo("Updated Title"));
+
+        // PATCH Request: Update specific fields
+        given()
+                .header("Content-Type", "application/json")
+                .body("{\"title\":\"Partially Updated Title\"}")
+                .when()
+                .patch("/posts/1")
+                .then()
+                .log().all()
+                .statusCode(200)
+                .body("title", equalTo("Partially Updated Title"));
+
+    }
+}
+
+
+# 3. Practice Questions  
+1. Use PUT to update the title and body of a post.  
+2. Use PATCH to update only the title of the post.  
+3. Validate the response and ensure the updates are reflected.  
+
+# 4. What’s Next?  
+Tomorrow, we’ll learn to delete resources using DELETE requests and verify their removal.
+---
