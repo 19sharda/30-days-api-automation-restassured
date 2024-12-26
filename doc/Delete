@@ -1,0 +1,40 @@
+### *🚀 Day 6: Automating DELETE Requests*
+
+#### *1. What are we doing today?*
+Today, we’ll delete resources using DELETE requests and validate their removal.
+
+💡 *Layman’s Example:* Think of deleting an unwanted email from your inbox.
+
+---
+
+#### *2. Code for Implementation*
+
+//java
+// DELETE Request: Remove the resource
+public class Delete {
+    public static void main(String[] args) {
+        baseURI = "https://jsonplaceholder.typicode.com";
+        given()
+                .when()
+                .delete("/posts/1")
+                .then()
+                .log().all()
+                .statusCode(200); // Or 204 for successful deletion
+
+
+    }
+}
+
+---
+
+#### *3. Practice Questions*
+1. Delete a specific post using the DELETE method.
+2. Attempt to delete the same post again and validate the response (it should return 404).
+3. Verify the post no longer exists by performing a GET request.
+
+---
+
+#### *4. What’s Next?*
+Tomorrow, we’ll extract and validate data from JSON responses using *JSONPath*.
+
+---

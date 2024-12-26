@@ -48,7 +48,7 @@ public class PutandPatch {
 # 3. Practice Questions  
 1. Use PUT to update the title and body of a post.  
 2. Use PATCH to update only the title of the post.  
-3. Validate the response and ensure the updates are reflected.  
+3. Validate the response and ensure the updates are reflected.
 
 # 4. What’s Next?  
 Tomorrow, we’ll learn to delete resources using DELETE requests and verify their removal.
