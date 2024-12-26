@@ -26,6 +26,7 @@ public class Delete {
 }
 
 ---
+Git: https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/Delete.java
 
 #### *3. Practice Questions*
 1. Delete a specific post using the DELETE method.
