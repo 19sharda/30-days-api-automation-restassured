@@ -1,13 +1,13 @@
 🚀 Day 5: Automating PUT and PATCH Requests
 
-# 1. What are we doing today?  
-We’re learning how to update resources:  
-- PUT: Replace the entire resource.  
-- PATCH: Update only specific fields.  
+# 1. What are we doing today?
+We’re learning how to update resources:
+- PUT: Replace the entire resource.
+- PATCH: Update only specific fields.
 
 💡Example: Imagine updating your online profile.
-- PUT: Replace the whole profile (name, email, phone).  
-- PATCH: Update just the email.  
+- PUT: Replace the whole profile (name, email, phone).
+- PATCH: Update just the email.
 
 2. Code for Implementation
 
@@ -45,13 +45,146 @@ public class PutandPatch {
 }
 
 
-# 3. Practice Questions  
-1. Use PUT to update the title and body of a post.  
-2. Use PATCH to update only the title of the post.  
+# 3. Practice Questions
+1. Use PUT to update the title and body of a post.
+2. Use PATCH to update only the title of the post.
 3. Validate the response and ensure the updates are reflected.
 
 Git: https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/PutandPatch.java
 
-# 4. What’s Next?  
+# 4. What’s Next?
 Tomorrow, we’ll learn to delete resources using DELETE requests and verify their removal.
 ---
+### Interview Questions and Answers: Automating PUT and PATCH Requests 🚀
+
+#### **1. What is the primary difference between PUT and PATCH requests?**
+**Answer:**
+- **PUT** is used to replace an entire resource with a new one. For example, when updating an online profile, a PUT request will overwrite all fields (e.g., name, email, phone).
+- **PATCH** is used to update specific fields in a resource without altering the other fields. For example, updating just the email in your profile without changing the name or phone.
+
+---
+
+#### **2. What HTTP status codes should you expect after successfully executing PUT and PATCH requests?**
+**Answer:**
+- **PUT**: The typical success status code is **200 (OK)** if the resource is updated or **201 (Created)** if a new resource is created.
+- **PATCH**: The success status code is usually **200 (OK)** when the update is partial and successful.
+
+---
+
+#### **3. How would you validate the changes after making a PUT or PATCH request?**
+**Answer:**
+Validation can be done by:
+1. **Checking the response body** to ensure the updated fields match the expected values.
+2. **Verifying the status code** returned (e.g., 200).
+3. **Making a GET request** to retrieve the resource and confirming the changes persist.
+
+---
+
+#### **4. What are the key steps to implement a PUT request in Rest Assured?**
+**Answer:**
+1. Set the base URI using `baseURI`.
+2. Use the `given()` method to define headers and the request body.
+3. Use `put()` with the endpoint to execute the PUT request.
+4. Validate the status code and response body using assertions like `statusCode()` and `body()`.
+
+---
+
+#### **5. What Java library is used in the example, and what are its key benefits for API testing?**
+**Answer:**
+The library used is **Rest Assured**.
+**Benefits:**
+- Provides a user-friendly DSL for writing API tests.
+- Supports seamless integration with JSON and XML-based APIs.
+- Simplifies HTTP requests and response validation.
+- Includes built-in methods for logging and debugging.
+
+---
+
+#### **6. What does the `given()` method do in Rest Assured?**
+**Answer:**
+The `given()` method is used to set up the request by defining:
+- **Headers:** For example, `Content-Type` as `application/json`.
+- **Body:** The payload to send with the request.
+- **Parameters (if any):** For query or path parameters.
+
+---
+
+#### **7. Can you explain the usage of the `body()` method in the example code?**
+**Answer:**
+The `body()` method is used to:
+- Specify the payload sent with the request, typically in JSON format.
+- For the PUT request: The entire resource is provided in the body to replace the original.
+- For the PATCH request: Only the fields to be updated are included in the body.
+
+---
+
+#### **8. How do you ensure idempotency with PUT requests?**
+**Answer:**
+PUT is inherently **idempotent**, meaning that making the same request multiple times results in the same outcome. To ensure idempotency:
+- Provide the full resource payload in the body.
+- Use unique identifiers (like IDs) in the endpoint to update the correct resource.
+
+---
+
+#### **9. What logging options does Rest Assured provide for debugging?**
+**Answer:**
+Rest Assured offers the `log().all()` method to log:
+- Request details, including headers, payload, and endpoint.
+- Response details, such as status code, headers, and body.
+
+---
+
+#### **10. Write a test case to verify that a PATCH request does not overwrite unspecified fields.**
+**Answer:**
+```java
+given()
+    .header("Content-Type", "application/json")
+    .body("{\"title\":\"Partially Updated Title\"}")
+    .when()
+    .patch("/posts/1")
+    .then()
+    .log().all()
+    .statusCode(200)
+    .body("title", equalTo("Partially Updated Title"))
+    .body("body", equalTo("Original Content")); // Ensuring the 'body' field is not altered
+```
+
+---
+
+#### **11. What challenges might you face when testing PUT and PATCH requests?**
+**Answer:**
+- **Data Consistency:** Ensuring the database reflects the changes made via PUT/PATCH requests.
+- **Validation of Partial Updates (PATCH):** Ensuring only the specified fields are updated, and the rest remain unchanged.
+- **Concurrent Requests:** Testing behavior when multiple PUT/PATCH requests are made simultaneously to the same resource.
+
+---
+
+#### **12. How would you explain the analogy used for PUT and PATCH requests to a non-technical interviewer?**
+**Answer:**
+Imagine you’re updating your online profile:
+- **PUT:** You submit a completely new profile form, overwriting all existing fields with the new data.
+- **PATCH:** You only update specific fields, like changing your email, while the other fields (name, phone) remain untouched.
+
+---
+
+#### **13. How does the `statusCode()` method in Rest Assured contribute to API testing?**
+**Answer:**
+The `statusCode()` method allows you to validate that the HTTP response status matches the expected value. This is crucial to ensure:
+- The server processes requests correctly (e.g., 200 for success, 400 for bad requests).
+- The API adheres to expected behavior and standards.
+
+---
+
+#### **14. What’s the difference between a PUT request creating and updating a resource?**
+**Answer:**
+- **Creating:** If the resource does not exist, a PUT request can create it with the provided data, returning a **201 (Created)** status code.
+- **Updating:** If the resource exists, a PUT request will update it entirely, returning a **200 (OK)** status code.
+
+---
+
+#### **15. Why is it important to validate API responses when automating PUT and PATCH requests?**
+**Answer:**
+Validation ensures:
+- Data integrity: The server correctly processes and stores the updates.
+- Compliance: The API behaves according to specifications.
+- Reliability: The system handles different scenarios (e.g., missing or invalid data) appropriately.

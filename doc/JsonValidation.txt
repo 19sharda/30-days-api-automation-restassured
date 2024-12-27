@@ -1,0 +1,41 @@
+ 🚀 Day 7: Validating JSON Responses with JSONPath  
+
+# 1. What are we doing today?  
+We’ll extract specific data from JSON responses using JSONPath.  
+
+💡 Example: Imagine searching a dictionary for the meaning of a word (e.g., extracting the title of a post).
+
+---
+
+# 2. Code for Implementation  
+
+public class JsonValidation {
+    public static void main(String[] args) {
+        baseURI = "https://jsonplaceholder.typicode.com";
+        String response = given()
+                .when()
+                .get("/posts/1")
+                .then()
+                .extract().asString();
+// Extract and validate fields using JSONPath
+        int userId = JsonPath.from(response).getInt("userId");
+        String title = JsonPath.from(response).getString("title");
+
+        System.out.println("User ID: " + userId);
+        System.out.println("Title: " + title);
+        assertEquals(userId, 1);
+        assertEquals(title, "sunt aut facere repellat provident occaecati excepturi optio reprehenderit");
+
+
+    }
+}
+---
+
+# 3. Practice Questions  
+1. Extract the title of the first post from a JSON response.  
+2. Validate the userId and body of specific posts.
+
+Git: Git: https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/JsonValidation.java
+
+# 4. What’s Next?  
+Tomorrow, we’ll use query parameters to filter API responses dynamically.  
