@@ -1,0 +1,70 @@
+ 🚀 Day 8: Using Query Parameters
+
+
+
+# 1. What are we doing today?
+
+We’ll add query parameters to filter API responses.
+
+
+
+💡 Layman’s Example: Imagine searching for books on an e-commerce site using a filter like "author=John Doe."
+
+---
+
+
+
+# 2. Code for Implementation
+
+
+
+java
+
+public class QueryParameter {
+
+    public static void main(String[] args) {
+
+        baseURI = "https://jsonplaceholder.typicode.com";
+
+        given()
+
+                .queryParam("userId", 1)
+
+                .when()
+
+                .get("/posts")
+
+                .then()
+
+                .log().all()
+
+                .statusCode(200)
+
+                .body("[0].userId", equalTo(1)); // Validate filtered response
+
+
+
+    }
+
+}
+
+
+
+  ---
+
+
+
+# 3. Practice Questions
+
+1. Filter posts by userId using query parameters.
+
+2. Use multiple query parameters (e.g., userId=1 and category=sports).
+
+3. Validate that the response matches the filter criteria.
+
+Git: https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/QueryParameter.java
+
+# 4. What’s Next?
+
+Tomorrow, we’ll explore adding custom headers to API requests.
+
