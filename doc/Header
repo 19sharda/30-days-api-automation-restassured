@@ -75,6 +75,6 @@ public class AddingHeadersExample {
    - Validate whether the server appropriately rejects the request (e.g., returns `401 Unauthorized`).
 
 ---
-
+Git: https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/Header.java
 5. What’s Next?**  
 Tomorrow, we’ll handleBasic Authentication** in API requests, learning how to send username and password securely in the headers to access secure resources.
