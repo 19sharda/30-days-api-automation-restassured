@@ -1,0 +1,80 @@
+🚀 Day 9: Adding Headers to Requests
+
+1. What are we doing today?**  
+We’ll learn how to send custom headers like `Authorization` or `Content-Type` in API requests to meet the requirements of secure and specific APIs.  
+
+💡Example:**
+Think of using a passcode (Authorization header) to enter a secure building or specifying your preferred language when booking a movie ticket (custom headers).  
+
+---
+
+2. Code for Implementation**
+
+Here’s how you can send custom headers using Rest Assured:
+
+```java
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+
+public class AddingHeadersExample {
+    public static void main(String[] args) {
+        // Base URI for the API
+        baseURI = "https://jsonplaceholder.typicode.com"; // Example public API
+
+        // Example 1: Adding custom headers
+        given()
+            .header("Custom-Header", "CustomValue") // Adding a custom header
+            .header("Content-Type", "application/json") // Adding Content-Type header
+        .when()
+            .get("/posts/1") // Endpoint for testing
+        .then()
+            .statusCode(200) // Validate the status code
+            .body("id", equalTo(1)) // Check 'id' field in the response
+            .log().all(); // Log the response
+
+        // Example 2: Removing a required header
+        try {
+            given()
+                .when()
+                .get("/posts/1") // No headers sent
+            .then()
+                .statusCode(200) // Public API doesn't require headers, so this will pass
+                .log().all();
+        } catch (Exception e) {
+            System.out.println("Error occurred when no headers are sent: " + e.getMessage());
+        }
+    }
+}
+```
+
+---
+
+3. Explanation of Headers
+
+1.Custom Header:**  
+   - `header("Custom-Header", "CustomValue")` adds a custom header to the request.
+   - These headers can pass metadata or unique information required by the API (e.g., tracking usage or preferences).
+
+2.Content-Type Header:**  
+   - Specifies the format of the request (e.g., JSON, XML).  
+   - `"application/json"` is typically used for REST APIs.
+
+3.Omitting Headers:**  
+   - Omitting a required header (e.g., `Authorization`) may cause the API to fail, returning errors like `401 Unauthorized` or `400 Bad Request`.  
+
+---
+
+4. Practice Questions**
+
+1.Add a Custom Header and Validate the Response:**  
+   - Modify the code to include headers like `"X-API-Key": "12345"`.  
+   - Validate the response by checking the status code and specific fields in the body.
+
+2.Remove a Required Header and Observe the Response:**  
+   - Omit an essential header (e.g., `Content-Type` or `Authorization`) to simulate how the server handles invalid requests.  
+   - Validate whether the server appropriately rejects the request (e.g., returns `401 Unauthorized`).
+
+---
+
+5. What’s Next?**  
+Tomorrow, we’ll handleBasic Authentication** in API requests, learning how to send username and password securely in the headers to access secure resources.
