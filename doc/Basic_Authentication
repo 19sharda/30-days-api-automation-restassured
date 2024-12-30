@@ -1,0 +1,69 @@
+🚀 Day 10: Automating Basic Authentication
+
+
+
+1. What are we doing today?
+
+Today, we’ll tackle Basic Authentication. Many APIs require authentication before you can access data. Basic Authentication involves passing a username and password encoded in the request header.
+
+
+
+💡Example: Just like how you need a key to enter a locked room, Basic Authentication uses a username and password to grant access to restricted areas in an API.
+
+
+
+---
+
+
+
+2. Code for Implementation
+
+
+
+public class Basic_Authentication {
+
+    public static void main(String[] args) {
+
+        given()
+
+                .auth()
+
+                .basic("username", "password")
+
+                .when()
+
+                .get("https://httpbin.org/basic-auth/username/password")
+
+                .then()
+
+                .log().all()
+
+                .statusCode(200);
+
+    }
+
+}
+
+
+
+---
+
+
+
+3. Practice Questions
+
+1. Write a test case to access a secured API using Basic Authentication.
+
+2. Try sending incorrect credentials and check for a 401 Unauthorized response.
+
+3. Validate that the correct status code and message are returned.
+
+Git: https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/Basic_Authentication.java
+
+---
+
+
+
+4. What’s Next?
+
+Tomorrow, we’ll learn how to validate response headers for API responses.
