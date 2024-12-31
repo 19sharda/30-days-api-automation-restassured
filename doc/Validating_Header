@@ -3,7 +3,7 @@
 1. What are we doing today?
 We’re going to validate response headers. Headers provide essential information about the response, such as the content type and cache policy.
 
-💡 Layman’s Example: Think of response headers like the packaging of an item. It tells you whether it’s fragile, the expiry date, or how to store it.
+💡Example: Think of response headers like the packaging of an item. It tells you whether it’s fragile, the expiry date, or how to store it.
 
 ---
 
