@@ -11,7 +11,8 @@ public class Header {
         // Example 1: Adding custom headers
         given()
             .header("Custom-Header", "CustomValue") // Adding a custom header
-            .header("Content-Type", "application/json") // Adding Content-Type header
+                .header("X-API-Key", "12345") // Adding a custom header
+            .header("Content-Ty", "application/jso") // Adding Content-Type header
         .when()
             .get("/posts/1") // Endpoint for testing
         .then()

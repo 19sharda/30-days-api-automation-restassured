@@ -1,0 +1,39 @@
+🚀 Day 11: Validating Response Headers
+
+1. What are we doing today?
+We’re going to validate response headers. Headers provide essential information about the response, such as the content type and cache policy.
+
+💡 Layman’s Example: Think of response headers like the packaging of an item. It tells you whether it’s fragile, the expiry date, or how to store it.
+
+---
+
+2. Code for Implementation
+
+public class Validating_Header {
+    public static void main(String[] args) {
+        baseURI = "https://jsonplaceholder.typicode.com";
+        given()
+                .when()
+                .get("/posts/1")
+                .then()
+                .log().headers()
+                .statusCode(200)
+                .header("Content-Type", "application/json; charset=utf-8")
+                .header("Cache-Control", "no-cache");
+    }
+}
+
+
+---
+
+3. Practice Questions
+1. Extract and validate the Content-Type and Cache-Control headers from an API response.
+2. Check for the presence of authentication-related headers like Authorization.
+3. Test for any unexpected or missing headers in the response.
+
+Git: https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/Validating_Header.java
+---
+
+4. What’s Next?
+Tomorrow, we’ll explore response time validation and ensure that our API is performing within expected limits.
+
