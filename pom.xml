@@ -5,19 +5,26 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- Project information -->
-    <groupId>com.yourname</groupId>      <!-- Replace with your group ID -->
-    <artifactId>30-days-api-automation</artifactId> <!-- Replace with your artifact ID -->
-    <version>1.0-SNAPSHOT</version>     <!-- Version of the project -->
+    <groupId>com.yourname</groupId> <!-- Replace 'com.yourname' with your organization or domain group ID -->
+    <artifactId>30-days-api-automation</artifactId> <!-- Replace with a descriptive artifact ID -->
+    <version>1.0-SNAPSHOT</version> <!-- Version of the project -->
     <packaging>jar</packaging>
 
-    <!-- Dependencies for the project -->
+    <!-- Dependencies -->
     <dependencies>
         <!-- Rest Assured for API testing -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>4.4.0</version>
+            <version>5.2.0</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- Hamcrest for matchers -->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>2.2</version>
         </dependency>
 
         <!-- Cucumber dependencies for BDD testing -->
@@ -51,10 +58,10 @@
         </dependency>
     </dependencies>
 
-    <!-- Build plugins -->
+    <!-- Build configuration -->
     <build>
         <plugins>
-            <!-- Compiler plugin for Java -->
+            <!-- Compiler plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -65,14 +72,14 @@
                 </configuration>
             </plugin>
 
-            <!-- Surefire plugin for running tests -->
+            <!-- Surefire plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
                     <includes>
-                        <include>/*Test.java</include>
+                        <include>**/*Test.java</include>
                     </includes>
                 </configuration>
             </plugin>

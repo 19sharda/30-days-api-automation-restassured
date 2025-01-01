@@ -1,0 +1,125 @@
+ This is the New Year! Let's Recap What We Have Explored So Far 🎉  
+
+As we step into a fresh chapter, let’s take a moment to reflect on all the exciting concepts we’ve learned so far. Starting tomorrow, we’ll dive into more advanced topics, but for now, let’s revisit what we’ve mastered together!  
+
+
+ 1. GET Request – Fetching Information  
+Imagine going to a library and asking for a specific book. A GET request works the same way—you request data from a server, and it sends the requested information back to you.  
+Example:  
+- Request: "Can I get the details of all the books?"  
+- Response: A list of books with titles, authors, etc.
+
+
+ 2. POST Request – Submitting Data  
+When you fill out a form online, like signing up for a newsletter, you’re using a POST request. It sends new data to the server to be saved.  
+Example:  
+- Request: "Please add this new book to your library database."  
+- Response: "New book added successfully!"
+
+
+ 3. PUT and PATCH – Updating Information  
+- PUT: Like replacing an old book with a new edition. It updates the whole resource.  
+- PATCH: Like correcting a typo in a book’s title. It updates just part of the resource.  
+Example:  
+- PUT: "Replace the details of this book with these new details."  
+- PATCH: "Update just the price of this book."
+
+
+ 4. DELETE – Removing Data  
+If a book is no longer needed, you ask to remove it from the library. A DELETE request does just that—it removes data from the server.  
+Example:  
+- Request: "Please delete this book from the library database."  
+- Response: "Book deleted successfully."
+
+
+ 5. Query Parameters – Customizing Requests  
+Think of this as adding filters to your search. You can narrow down your results by specifying parameters.  
+Example:  
+- Request: "Can I get all books by 'J.K. Rowling' published after 2010?"  
+- Response: A list of filtered books.
+
+
+ 6. Headers – Adding Extra Information  
+Headers are like passing a note along with your request to provide extra details, like who you are or what kind of response you want.  
+Example:  
+- Header: "Accept: application/json" (Requesting data in JSON format)  
+
+
+ 7. JSON Validation – Checking the Data  
+When you receive data, you ensure it’s in the expected format and contains the required information. Think of it as making sure the book’s details match the library’s catalog rules.  
+
+
+ 8. Basic Authentication – Securing Access  
+This is like having a library card to access restricted sections. With Basic Authentication, you provide a username and password to prove you’re authorized.  
+How it Works:  
+- Combine your username and password: `user:pass`  
+- Encode it in Base64: `dXNlcjpwYXNz`  
+- Add it to the request header:  
+  ```
+  Authorization: Basic dXNlcjpwYXNz
+  ```  
+Example:  
+- Request: "Here are my credentials. Can I access this restricted book?"  
+- Response: "Access granted!"
+
+
+ 9. Validating Headers – Ensuring Correctness  
+Before processing a request, we check the headers to make sure they include all necessary details. This ensures smooth communication.  
+
+
+ Putting It All Together  
+Here’s a single code snippet demonstrating everything we’ve learned:  
+
+```java
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
+public class APITestingRecap {
+    public static void main(String[] args) {
+        // Base URL
+        RestAssured.baseURI = "https://api.example.com";
+
+        // GET Request
+        Response getResponse = RestAssured
+            .given()
+            .get("/books");
+        System.out.println("GET Response: " + getResponse.asPrettyString());
+
+        // POST Request
+        String newBook = "{ \"title\": \"New Year Book\", \"author\": \"John Doe\" }";
+        Response postResponse = RestAssured
+            .given()
+            .header("Content-Type", "application/json")
+            .body(newBook)
+            .post("/books");
+        System.out.println("POST Response: " + postResponse.asPrettyString());
+
+        // PUT Request
+        String updatedBook = "{ \"title\": \"Updated Title\", \"author\": \"Jane Doe\" }";
+        Response putResponse = RestAssured
+            .given()
+            .header("Content-Type", "application/json")
+            .body(updatedBook)
+            .put("/books/1");
+        System.out.println("PUT Response: " + putResponse.asPrettyString());
+
+        // DELETE Request
+        Response deleteResponse = RestAssured
+            .given()
+            .delete("/books/1");
+        System.out.println("DELETE Response: " + deleteResponse.asPrettyString());
+
+        // Basic Authentication
+        Response authResponse = RestAssured
+            .given()
+            .auth()
+            .basic("username", "password")
+            .get("/restricted-books");
+        System.out.println("Authenticated GET Response: " + authResponse.asPrettyString());
+    }
+}
+```
+
+Git: https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/Recap.java
+ What’s Next?  
+Tomorrow, we’ll take our learning to the next level, exploring more advanced topics and techniques in API automation. Stay tuned! 🚀
