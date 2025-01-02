@@ -1,0 +1,30 @@
+🚀 Day 13: Testing Response Time
+
+ 1. What are we doing today?
+Today, we will focus on testing the response time of API requests. Slow response times can indicate issues with server performance.
+
+💡 Layman’s Example: Imagine waiting for a webpage to load. If it takes too long, it can be frustrating, just like how long API response times can affect the user experience.
+
+---
+
+ 2. Code for Implementation
+
+java
+given()
+.when()
+    .get("/posts/1")
+.then()
+    .time(lessThan(2000L)); // Ensure response time is under 2 seconds
+
+
+---
+
+ 3. Practice Questions
+1. Validate the response time for different API endpoints.
+2. Ensure that the response time stays under a certain threshold (e.g., 3 seconds).
+3. Compare response times between different API endpoints and identify potential performance bottlenecks.
+Fun with GIt :https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/ResponseTime.java
+---
+
+ 4. What’s Next?
+Tomorrow, we’ll cover data-driven testing using TestNG, so we can reuse test data across multiple test cases.
