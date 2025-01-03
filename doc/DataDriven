@@ -1,0 +1,60 @@
+🚀 Day 14: Data-Driven Testing with TestNG
+
+ 1. What are we doing today?  
+We’ll implement data-driven testing using TestNG. This allows us to run the same test with multiple sets of data, making our tests scalable and efficient.
+
+💡Example: It’s like testing a vending machine with different coins to ensure it works with any denomination.
+
+---
+
+ 2. Code for Implementation
+
+//java
+package tests;
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.equalTo;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+public class dataDriven {
+
+    // Setting the base URI for RestAssured
+    static {
+        baseURI = "https://jsonplaceholder.typicode.com";
+    }
+
+    // DataProvider to supply test data to the test method
+    @DataProvider(name = "testData")
+    public Object[][] createTestData() {
+        return new Object[][]{
+                {1, "sunt aut facere repellat provident occaecati excepturi optio reprehenderit"},
+                {2, "et ea vero quia laudantium autem"}
+        };
+    }
+
+    // Test method that consumes the data provided by the DataProvider
+    @Test(dataProvider = "testData")
+    public void testWithMultipleData(int userId, String expectedTitle) {
+        given()
+            .queryParam("userId", userId)
+            .when()
+            .get("/posts")
+            .then()
+                .log().all()
+            .body("[0].title", equalTo(expectedTitle));
+    }
+}
+
+
+---
+
+ 3. Practice Questions  
+1. Write tests that fetch posts for different userId values and validate the title for each.  
+2. Test with more data points and create a reusable data provider method.  
+3. Try using external data sources like Excel or CSV files for input.
+GIT:Git: https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/dataDriven.java
+---
+
+ 4. What’s Next?  
+Tomorrow, we’ll dive into chaining requests to create workflows that require multiple API calls.
