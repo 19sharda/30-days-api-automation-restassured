@@ -53,7 +53,7 @@ public class dataDriven {
 1. Write tests that fetch posts for different userId values and validate the title for each.  
 2. Test with more data points and create a reusable data provider method.  
 3. Try using external data sources like Excel or CSV files for input.
-GIT:Git: https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/dataDriven.java
+GIT: https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/dataDriven.java
 ---
 
  4. What’s Next?  
