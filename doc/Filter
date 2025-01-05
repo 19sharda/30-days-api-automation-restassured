@@ -1,0 +1,36 @@
+🚀 Day 16: Using Filters for Debugging
+
+1. What are we doing today?  
+We’ll use filters in Rest Assured to log and debug requests and responses. Filters help us track API calls, making it easier to troubleshoot.
+
+💡Example: Filters are like surveillance cameras in a store, recording everything that happens in the store. You can review the footage (logs) later if something goes wrong.
+
+---
+
+2. Code for Implementation
+public class Filter {
+    public static void main(String[] args) {
+        baseURI = "https://jsonplaceholder.typicode.com";
+        given()
+                .filter(new RequestLoggingFilter())  // Logs requests
+                .filter(new ResponseLoggingFilter()) // Logs responses
+                .when()
+                .get("/posts/1")
+                .then()
+                .statusCode(200);
+
+    }
+}
+
+---
+
+3. Practice Questions  
+1. Log both requests and responses for your test cases.  
+2. Create custom filters to add additional information to logs.  
+3. Analyze logs to identify potential issues or performance bottlenecks.
+GIT: https://github.com/19sharda/30-days-api-automation-restassured/blob/main/src/test/java/tests/Filter.java
+---
+
+4. What’s Next?  
+Tomorrow, we’ll explore handling JSON and XML response formats in API testing.
+
