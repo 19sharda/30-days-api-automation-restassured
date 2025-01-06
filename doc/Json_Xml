@@ -1,0 +1,48 @@
+🚀 Day 17: Handling JSON and XML Responses
+
+1. What are we doing today?  
+We’ll learn how to handle both JSON and XML responses from APIs. Many APIs return either of these formats, and we need to validate them properly.
+
+💡 Example: JSON is like a list of items in a grocery cart, while XML is more structured with tags, like labels on each item.
+
+---
+
+2. Code for Implementation
+
+java
+public class Json_Xml {
+    public static void main(String[] args) {
+        baseURI = "https://jsonplaceholder.typicode.com";
+        // Handling JSON Response
+        given()
+                .when()
+                .get("/posts/1")
+                .then()
+                .statusCode(200)
+                .body("userId", equalTo(1))
+                .body("title", equalTo("sunt aut facere repellat provident occaecati excepturi optio reprehenderit"));
+
+// Handling XML Response
+        given()
+                .when()
+                .get("/users/1")
+                .then()
+                .statusCode(200)
+                .body("name", equalTo("Leanne Graham"));
+
+    }
+}
+
+
+
+---
+
+3. Practice Questions  
+1. Write tests to validate both JSON and XML responses for the same endpoint.  
+2. Validate that specific fields exist in both response formats.  
+3. Handle nested JSON and XML elements to extract values.
+
+---
+
+4. What’s Next?  
+Tomorrow, we’ll begin working on framework development to make your tests more reusable.
