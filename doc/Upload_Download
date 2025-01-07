@@ -1,0 +1,82 @@
+Day 18: Automating File Upload and Download APIs
+
+Focus on testingfile upload andfile download APIs using Rest Assured. These scenarios are commonly used for uploading files (e.g., images, PDFs) and downloading them.  
+
+---
+
+1. Testing File Upload APIs  
+
+Steps to Test File Upload  
+1.Prepare the File  
+   - Ensure the file is available in your project directory.  
+2.Send a Multipart Request  
+   - Use Rest Assured’s `multiPart()` to attach the file.  
+3.Send POST Request  
+   - Use the `POST` method to upload the file.  
+4.Validate Response  
+   - Check status code and response message to confirm success.  
+
+Code Example: File Upload  
+```java
+File file = new File("src/test/resources/sample.pdf");
+
+Response response = RestAssured.given()
+    .multiPart("file", file)
+    .formParam("userId", "12345")
+    .post("/upload")
+    .then()
+    .statusCode(200)
+    .extract().response();
+
+System.out.println("Response: " + response.asString());
+```
+
+Key Points  
+- Use `multiPart()` for file attachments.  
+- Combine `multiPart` with `formParam` for additional parameters.  
+
+---
+
+2. Testing File Download APIs  
+
+Steps to Test File Download  
+1.Send GET Request  
+   - Use a GET request to access the endpoint.  
+2.Save the File  
+   - Store the response as a binary file.  
+3.Validate File Content  
+   - Check file size, type, or checksum.  
+
+Code Example: File Download  
+```java
+Response response = RestAssured.given()
+    .get("/download/sample.pdf")
+    .then()
+    .statusCode(200)
+    .extract().response();
+
+byte[] fileContent = response.asByteArray();
+File outputFile = new File("downloaded_sample.pdf");
+FileOutputStream fos = new FileOutputStream(outputFile);
+fos.write(fileContent);
+fos.close();
+
+System.out.println("File saved at: " + outputFile.getAbsolutePath());
+```
+
+Key Points  
+- Use `response.asByteArray()` to retrieve binary content.  
+- Save files with Java’s `FileOutputStream`.  
+
+---
+
+3. Validating File Operations  
+-Upload: Validate response for file name, size, or server confirmation.  
+-Download: Verify metadata (e.g., Content-Type, file size) and checksum.  
+
+---
+
+Summary  
+- Automate file uploads with `multiPart()` and downloads with `asByteArray()`.  
+- Validate operations by checking response and file content.  
+By mastering these, you can confidently handle file-related API tests.
