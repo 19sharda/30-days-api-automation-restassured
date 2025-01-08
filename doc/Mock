@@ -1,0 +1,108 @@
+ Day 19: Mocking APIs with WireMock
+
+Today, we focus on mocking APIs using WireMock, a powerful tool to simulate API responses for testing. This is particularly useful when the actual API is unavailable, still under development, or requires specific scenarios to be tested.
+
+---
+
+ What is WireMock?  
+WireMock is a flexible library for mocking HTTP APIs. It allows you to create a mock server that mimics real API behavior by defining custom responses for specific requests.
+
+---
+
+ 1. Setting Up WireMock  
+
+ Steps to Set Up  
+1. Add WireMock Dependency  
+   Include the WireMock dependency in your project.  
+   ```xml
+   <dependency>
+       <groupId>com.github.tomakehurst</groupId>
+       <artifactId>wiremock</artifactId>
+       <version>2.35.0</version>
+   </dependency>
+   ```
+
+2. Start WireMock Server  
+   Use Java code to start the WireMock server.  
+
+---
+
+ 2. Mocking API Responses  
+
+ Steps to Mock an API  
+1. Define Stub Mapping  
+   Configure WireMock to listen for specific requests and return predefined responses.  
+2. Run the Test Against Mock Server  
+   Replace the real API endpoint with the mock server URL.  
+
+---
+
+ Code Example: Mocking with WireMock  
+```java
+import com.github.tomakehurst.wiremock.WireMockServer;
+
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+
+public class MockingAPIs {
+    public static void main(String[] args) {
+        // Start WireMock Server
+        WireMockServer wireMockServer = new WireMockServer(8080);
+        wireMockServer.start();
+
+        // Stub a GET Request
+        wireMockServer.stubFor(get(urlEqualTo("/books"))
+            .willReturn(aResponse()
+                .withHeader("Content-Type", "application/json")
+                .withBody("[{\"id\": 1, \"title\": \"Mocked Book\"}]")
+                .withStatus(200)));
+
+        // Stub a POST Request
+        wireMockServer.stubFor(post(urlEqualTo("/add-book"))
+            .willReturn(aResponse()
+                .withStatus(201)
+                .withBody("{\"message\": \"Book added successfully!\"}")));
+
+        System.out.println("WireMock server running on port 8080. Test the mocked APIs!");
+
+        // Stop WireMock Server after testing
+        Runtime.getRuntime().addShutdownHook(new Thread(wireMockServer::stop));
+    }
+}
+```
+
+---
+
+ 3. Validating Mock Responses  
+
+ GET Request  
+- Use Rest Assured to call the `/books` endpoint.  
+```java
+Response getResponse = RestAssured.given()
+    .baseUri("http://localhost:8080")
+    .get("/books");
+System.out.println("GET Response: " + getResponse.asPrettyString());
+```
+
+ POST Request  
+- Call the `/add-book` endpoint with a body.  
+```java
+String newBook = "{ \"title\": \"Learning WireMock\" }";
+Response postResponse = RestAssured.given()
+    .baseUri("http://localhost:8080")
+    .header("Content-Type", "application/json")
+    .body(newBook)
+    .post("/add-book");
+System.out.println("POST Response: " + postResponse.asPrettyString());
+```
+
+---
+
+ Key Features of WireMock  
+- Stubbing: Define request-response pairs for mock APIs.  
+- Simulating Errors: Test how your application handles API failures (e.g., 500 errors).  
+- Request Verification: Verify how your application interacts with APIs.  
+
+---
+
+ Summary  
+Mocking APIs with WireMock provides a controlled environment for testing, ensuring stability and flexibility even when real APIs are unavailable. Mastering this tool helps you test various scenarios efficiently and enhances the robustness of your test automation.
